@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block extrahead %}
+    {{ form.media }}
+{% endblock extrahead %}
+
+{% block content %}
+    <form method="post" >
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+{% endblock content %}

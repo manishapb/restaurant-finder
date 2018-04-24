@@ -1,0 +1,9 @@
+{% block content %}
+<h1> List of restos </h1>
+<ul class="block">
+	{% for resto in object_list %}
+	<li><a href="{% url "resto:resto_detail" resto.id %}">{{ resto.name }}</a></li>
+	{% endfor %}
+</ul>
+{% endblock %}
+
