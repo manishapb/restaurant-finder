@@ -1,8 +1,40 @@
-{% block extrahead %}
-    {{ form.media }}
-{% endblock extrahead %}
 
 {% block content %}
-<h1>Detail</h1>
-    {{ form.as_p }}
-{% endblock content %}
+<h1>Resto Detail</h1>
+<h2> {{ resto.name }}</h2>
+<a href="{% url "resto:list" %}"> << Back </a>
+<p>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+	        var latlng = new google.maps.LatLng("{{ resto.address.y }}", "{{ resto.address.x }}");
+	        var mapOptions = {
+            zoom: 15,
+            center: latlng,
+            mapTypeControl: false,
+            navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL},
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        map = new google.maps.Map($('.map')[0], mapOptions);
+        
+	    latlng = new google.maps.LatLng("{{ resto.address.y }}", "{{ resto.address.x }}");
+        new google.maps.Marker({
+        	position: latlng,
+        	map: map,
+        	title:"{{ resto.name }}"
+        });
+    });
+</script>
+<div class="map" style="width: 400px; height: 400px;"></div>
+<div class="dish-list" >
+	<ul>
+	{% for dish in resto.dish_set.all %}
+		<li>{{ dish.name }}</li>
+	{% endfor %}
+	</ul>
+</div>
+<div class="add-dish">
+	<a href="{% url "resto:add_items" resto.id %}">Add Item</a>
+</div>
+{% endblock %}

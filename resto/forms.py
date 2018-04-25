@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Resto
+from .models import Resto,Dish
 from mapwidgets.widgets import GooglePointFieldWidget, GoogleStaticMapWidget, GoogleStaticOverlayMapWidget
 
 class RestoCreateForm(forms.ModelForm):
@@ -12,11 +12,20 @@ class RestoCreateForm(forms.ModelForm):
 		'address' : GooglePointFieldWidget,
 		}
 
-class RestoDetailForm(forms.ModelForm):
+	def is_valid(self):
+		return True
+
+class RestoUpdateForm(forms.ModelForm):
 	
 	class Meta:
 		model = Resto
 		fields= ('name','address')
 		widgets = {
-		'address': GooglePointFieldWidget(zoom=12,size = "250x250")
+		'address': GooglePointFieldWidget,
 		}
+
+class CreateDishForm(forms.ModelForm):
+
+	class Meta:
+		model = Dish
+		fields = ('name','description','cost','resto')

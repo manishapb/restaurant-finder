@@ -1,8 +1,8 @@
 from django.shortcuts import render,get_object_or_404
-from django.views.generic import CreateView,ListView,DetailView
-from .forms import RestoCreateForm,RestoDetailForm
+from django.views.generic import CreateView,ListView,DetailView,UpdateView
+from .forms import RestoCreateForm, RestoUpdateForm, CreateDishForm
 from django.urls import reverse_lazy
-from .models import Resto
+from .models import Resto,Dish
 
 class RestoCreateView(CreateView):
 	template_name = "resto/form.html"
@@ -19,16 +19,26 @@ class ListRestoView(ListView):
 	queryset = Resto.objects.all()
 	context_object_name = 'resto'
 
-class DetailRestoView_Od(DetailView):
+
+class DetailRestoView(DetailView):
 	model = Resto
 	template_name = 'resto/detail.html'
 
 	def get_object(self,**kwargs):
 		context = get_object_or_404(Resto,pk=self.kwargs.get('pk',None))
-		print(context.name)
+		#dishes = Dish.objects.get(resto=context)
 		return context
 
-class DetailRestoView(DetailView):
-	form_class = RestoDetailForm
-	model = Resto
-	template_name = 'resto/detail.html'
+
+class AddDishView(CreateView):
+	template_name="resto/add_item.html"
+	form_class = CreateDishForm
+	success_url = reverse_lazy("resto:list")
+
+	def form_valid(self,form):
+		print(self.request)
+		item = form.save(commit=False)
+		resto = Resto.objects.get(pk=self.request.POST.get('resto'))
+		item.resto = resto
+		#item.save()
+		return super(AddDishView,self).form_valid(form)
