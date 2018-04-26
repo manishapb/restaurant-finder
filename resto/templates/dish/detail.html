@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div>
+	<h1>{{ dish.name }}</h1>
+	<h2>{{ dish.description }}</h2>
+	<h3>{{ dish.cost }}</h3>
+	<h3><a href="{% url "resto:resto_detail" dish.resto.id  %}" >{{ dish.resto.name }}</h3>
+</div>
+{% endblock %}

@@ -1,5 +1,11 @@
 {% block content %}
 <h1> List of restos </h1>
+
+<form action="{% url "resto:search" %}" method="GET">
+      <input type="text" name="dish" results="5" autosave="stack" placeholder="Type your query and press enter..." />
+      <button type="submit">Search</button>
+</form>
+
 <ul class="block">
 	{% for resto in object_list %}
 	<li><a href="{% url "resto:resto_detail" resto.id %}">{{ resto.name }}</a></li>

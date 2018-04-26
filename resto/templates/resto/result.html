@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Search Result</h1>
+<a href="{% url "resto:list" %}"> << Back </a>
+<div class="search-result">
+	{% if result.all %}
+	<ul>
+		{% for item in result %}
+		<li><a href="{% url "resto:dish_detail" item.id %}" >{{ item.name }}</a></li>
+		{% endfor %}
+	</ul>
+	{% else %}
+		<p>
+		No matching objects
+		</p>
+	{% endif %}
+</div>
+{% endblock %}

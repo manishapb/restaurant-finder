@@ -3,6 +3,9 @@ from django.views.generic import CreateView,ListView,DetailView,UpdateView
 from .forms import RestoCreateForm, RestoUpdateForm, CreateDishForm
 from django.urls import reverse_lazy
 from .models import Resto,Dish
+from django.contrib.gis.measure import D
+from django.contrib.gis.geos import Point
+
 
 class RestoCreateView(CreateView):
 	template_name = "resto/form.html"
@@ -16,7 +19,8 @@ class RestoCreateView(CreateView):
 
 class ListRestoView(ListView):
 	template_name="resto/list.html"
-	queryset = Resto.objects.all()
+	default_pnt = Point(73.856255,18.516726)
+	queryset = Resto.objects.filter(address__distance_lte=(default_pnt,D(km=50)))
 	context_object_name = 'resto'
 
 
@@ -42,3 +46,20 @@ class AddDishView(CreateView):
 		item.resto = resto
 		#item.save()
 		return super(AddDishView,self).form_valid(form)
+
+def search(request):
+	if request.method=='GET':
+		print(request.GET)
+		search_query= request.GET.get('dish')
+		print(search_query)
+		search_query = search_query.strip()
+		result = Dish.objects.filter(name=search_query)
+		return render(request,'resto/result.html',{'result':result})
+
+class DishDetailView(DetailView):
+	template_name = 'dish/detail.html'
+	model = Dish
+
+	def get_object(self,**kwargs):
+		context = get_object_or_404(Dish,pk=self.kwargs.get('pk',None))
+		return context
