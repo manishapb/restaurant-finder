@@ -13,9 +13,9 @@ Simple restaurant finder using Django and Postgis
 You should have virtualenv installed on your system. Simple create a virtualenv with projectname.
 ```$ virtualenv projectname```
 
-### 2. Set up Database
+### 2. Set up Database and other dependencies
 
-Install Postgres and Postgis
+The addresses are stored in the database as spatial data using Postgres and Postgis. Make sure you have them installed on your machine.
 
 ```sudo apt-get install postgresql-9.5, postgresql-9.5-postgis postgresql-server-dev-9.5 binutils libproj-dev gdal-bin```
 
