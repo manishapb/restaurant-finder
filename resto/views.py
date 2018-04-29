@@ -51,9 +51,9 @@ def search(request):
 	if request.method=='GET':
 		print(request.GET)
 		search_query= request.GET.get('dish')
-		print(search_query)
 		search_query = search_query.strip()
 		result = Dish.objects.filter(name=search_query)
+
 		return render(request,'resto/result.html',{'result':result})
 
 class DishDetailView(DetailView):
@@ -63,3 +63,10 @@ class DishDetailView(DetailView):
 	def get_object(self,**kwargs):
 		context = get_object_or_404(Dish,pk=self.kwargs.get('pk',None))
 		return context
+
+def home_page(request):
+	restos = Resto.objects.all()[:10]
+	ip = request.META.get('REMOTE_ADDR', None)
+	print(ip)
+	return render(request,'home.html',{'restos': restos})
+

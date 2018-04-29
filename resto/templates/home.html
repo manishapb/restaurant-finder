@@ -1,17 +1,17 @@
 {% extends "base.html" %}
-
 {% block content %}
-<h1> List of restos </h1>
 
 <form action="{% url "resto:search" %}" method="GET">
       <input type="text" name="dish" results="5" autosave="stack" placeholder="Enter dish" />
       <button type="submit">Search</button>
 </form>
 
-<ul class="block">
-	{% for resto in object_list %}
+<div>
+	<p>Trending </p>
+	<ul>
+	{% for resto in restos %}
 	<li><a href="{% url "resto:resto_detail" resto.id %}">{{ resto.name }}</a></li>
 	{% endfor %}
-</ul>
+	</ul>
+</div>
 {% endblock %}
-
