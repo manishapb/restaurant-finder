@@ -22,6 +22,6 @@ from resto.views import home_page
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'', home_page, name='home'),
+    url(r'^$', home_page, name='home'),
     url(r'^resto/', include('resto.urls',namespace='resto')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
