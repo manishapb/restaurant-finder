@@ -134,7 +134,7 @@ STATICFILES_DIRS = [
 ]
 
 
-GOOGLE_MAP_API_KEY = "AIzaSyAz0lOpBpL_AwqSHDVfPepRpaBG9-4u5Jg"
+GOOGLE_MAP_API_KEY = "google-app-secret-key"
 
 try:
     from settings_local import *
