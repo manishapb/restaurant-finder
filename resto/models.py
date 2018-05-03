@@ -28,11 +28,13 @@ class Resto(models.Model):
 	def __unicode__(self):
 		return self.name
 
+
 class Dish(dmodels.Model):
 	name = dmodels.CharField(max_length=200)
 	description = dmodels.CharField(max_length=500)
 	cost = dmodels.FloatField()
 	resto = dmodels.ForeignKey(Resto,on_delete=dmodels.CASCADE)
+	veg = dmodels.BooleanField(default=True)
 
 	def __unicode__(self):
 		return self.name

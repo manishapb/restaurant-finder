@@ -28,4 +28,4 @@ class CreateDishForm(forms.ModelForm):
 
 	class Meta:
 		model = Dish
-		fields = ('name','description','cost','resto')
+		fields = ('name','description','cost','veg')
