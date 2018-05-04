@@ -145,7 +145,7 @@ except ImportError:
 MAP_WIDGETS = {
     "GooglePointFieldWidget": (
         ("zoom", 15),
-        ("mapCenterLocation", [18.5204, 73.8567]),
+        ("mapCenterLocationName", "India"),
         ("markerFitZoom", 11),
         ("GooglePlaceAutocompleteOptions", {'componentRestrictions': {'country': 'india'}})
     ),

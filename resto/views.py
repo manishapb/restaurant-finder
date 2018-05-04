@@ -65,8 +65,5 @@ class DishDetailView(DetailView):
 		return context
 
 def home_page(request):
-	restos = Resto.objects.all()[:10]
-	ip = request.META.get('REMOTE_ADDR', None)
-	print(ip)
-	return render(request,'home.html',{'restos': restos})
+	return render(request,'home.html', {})
 
