@@ -22,8 +22,6 @@ class WorldBorder(models.Model):
 class Resto(models.Model):
 	name=models.CharField(max_length=200)
 	address = models.PointField()
-	gis = GeoManager()
-	objects = dmodels.Manager()
 
 	def __unicode__(self):
 		return self.name

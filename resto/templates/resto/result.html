@@ -2,12 +2,12 @@
 
 {% block content %}
 <h1>Search Result</h1>
-<a href="{% url "resto:list" %}"> << Back </a>
+<a href="{% url "home" %}"> << Back </a>
 <div class="search-result">
-	{% if result.all %}
+	{% if dishes.all %}
 	<ul>
-		{% for item in result %}
-		<li><a href="{% url "resto:dish_detail" item.id %}" >{{ item.name }}</a></li>
+		{% for dish in dishes %}
+		<li><a href="{% url "resto:dish_detail" dish.id %}" >{{ dish.name }}</a></li>
 		{% endfor %}
 	</ul>
 	{% else %}

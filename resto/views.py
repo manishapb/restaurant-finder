@@ -49,12 +49,13 @@ class AddDishView(CreateView):
 
 def search(request):
 	if request.method=='GET':
-		print(request.GET)
-		search_query= request.GET.get('dish')
-		search_query = search_query.strip()
-		result = Dish.objects.filter(name=search_query)
-
-		return render(request,'resto/result.html',{'result':result})
+		lat = float(request.GET.get('user_lat'))
+		lng = float(request.GET.get('user_long'))
+		radius = float(request.GET.get('user_radius'))
+		point = Point(lng,lat)
+		restos = Resto.objects.filter(address__distance_lte=(point, D(m=radius)))
+		dishes = Dish.objects.filter(resto__in=restos)
+		return render(request,'resto/result.html',{'dishes':dishes})
 
 class DishDetailView(DetailView):
 	template_name = 'dish/detail.html'
