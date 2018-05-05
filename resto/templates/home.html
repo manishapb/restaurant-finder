@@ -63,14 +63,21 @@ window.onload = function () {
 {% endblock %}
 
 {% block content %}
+<center>
+	<h1>I Want Nachos</h1>
+</center>
 <form action="{% url "resto:search" %}" method="GET">
 	<input id="user_lat" type="text" name="user_lat" placeholder="28.6562" style="display: none" />
 	<input id="user_long" type="text" name="user_long" placeholder="77.2410" style="display: none" />
+	
+	<label for="user_radius">Range</label>
     <input id="user_radius" type="range" name="user_radius" min="5000" max="50000" value="5000" style="width:200px;" onchange="refreshMap()" />
-    <input id="user_veg_only" type="checkbox" value="veg_only" name="user_veg_only" />
-    <label for="user_veg_only">Veg Only?</label>
-    <button type="submit">Search</button>
+    <div style="float: right;">
+	    <input id="user_veg_only" type="checkbox" value="veg_only" name="user_veg_only" />
+    	<label for="user_veg_only">Veg Only?</label>
+    </div>
+	<button type="submit" >Search</button>
 </form>
-
+<br>
 <div id="locationpicker" style="width: 100%; height: 400px;"></div>
 {% endblock %}
