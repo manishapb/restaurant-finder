@@ -1,23 +1,40 @@
 {% extends "base.html" %}
 
+{% block extrahead %}
+<style type="text/css">
+.topright {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+}
+</style>
+{% endblock %}
+
 {% block content %}
 <h1>Search Result</h1>
 <a href="{% url "home" %}"> << Back </a>
 <div class="search-result">
 	{% if dishes.all %}
-	<ul>
 		{% for dish in dishes %}
-		<li><a href="{% url "resto:dish_detail" dish.id %}" >{{ dish.name }}</a>  
-			{% if dish.rating %} 
-			{{ dish.rating }}
-			{% else %}
-			<i>Not yet rated</i>
-			{% endif %}
-			<p>{{ dish.description }}</p>
-			<p>{{ dish.resto.name }}
-			<p>{{ dish.cost }}</p></li>	
+		<br>
+		<div class="mdl-card mdl-shadow--4dp" style="position: relative;">	
+			<div class="mdl-card__title">
+				<a href="{% url "resto:dish_detail" dish.id %}" >{{ dish.name }}  </a>
+				<span class="topright">
+					{% if dish.rating %} 
+					<p>{{ dish.rating }}</p>
+					{% else %}
+					<i>Not yet rated</i>
+					{% endif %}
+				</span>
+			</div>
+			<div class="mdl-card__supporting-text">
+				<p>{{ dish.description }}</p>
+				<p>{{ dish.resto.name }}</p>
+				<p>{{ dish.cost }}</p>
+			</div>
+		</div>	
 		{% endfor %}
-	</ul>
 	{% else %}
 		<p>
 		No matching objects
