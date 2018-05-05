@@ -12,10 +12,6 @@ class RestoCreateView(CreateView):
 	form_class = RestoCreateForm
 	success_url = reverse_lazy("resto:list")
 
-	def form_valid(self, form):
-		form.save()
-		return super(RestoCreateView, self).form_valid(form)
-
 
 class ListRestoView(ListView):
 	template_name="resto/list.html"
@@ -39,32 +35,39 @@ class AddDishView(CreateView):
 	form_class = CreateDishForm
 	success_url = reverse_lazy("resto:list")
 
-	def form_valid(self,form):
-		print(self.request)
-		item = form.save(commit=False)
-		resto = Resto.objects.get(pk=self.request.POST.get('resto'))
-		item.resto = resto
-		#item.save()
-		return super(AddDishView,self).form_valid(form)
+	# def form_valid(self,form):
+	# 	print(self.request)
+	# 	item = form.save(commit=False)
+
+	# 	resto = Resto.objects.get(pk=self.request.POST.get('resto'))
+	# 	item.resto = resto
+	# 	return super(AddDishView,self).form_valid(form)
+
 
 def search(request):
 	if request.method=='GET':
 		lat = float(request.GET.get('user_lat'))
 		lng = float(request.GET.get('user_long'))
 		radius = float(request.GET.get('user_radius'))
+
 		point = Point(lng,lat)
 		restos = Resto.objects.filter(address__distance_lte=(point, D(m=radius)))
-		dishes = Dish.objects.filter(resto__in=restos)
+
+		if request.GET.get('user_veg_only'):
+			dishes = Dish.objects.filter(resto__in=restos,veg=True)
+		else:
+			dishes = Dish.objects.filter(resto__in=restos)
+
 		return render(request,'resto/result.html',{'dishes':dishes})
 
+		
 class DishDetailView(DetailView):
 	template_name = 'dish/detail.html'
 	model = Dish
 
 	def get_object(self,**kwargs):
-		context = get_object_or_404(Dish,pk=self.kwargs.get('pk',None))
+		context = get_object_or_404(Dish,pk=self.kwargs.get('dish_id',None))
 		return context
 
 def home_page(request):
 	return render(request,'home.html', {})
-

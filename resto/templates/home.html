@@ -67,6 +67,8 @@ window.onload = function () {
 	<input id="user_lat" type="text" name="user_lat" placeholder="28.6562" style="display: none" />
 	<input id="user_long" type="text" name="user_long" placeholder="77.2410" style="display: none" />
     <input id="user_radius" type="range" name="user_radius" min="5000" max="50000" value="5000" style="width:200px;" onchange="refreshMap()" />
+    <input id="user_veg_only" type="checkbox" value="veg_only" name="user_veg_only" />
+    <label for="user_veg_only">Veg Only?</label>
     <button type="submit">Search</button>
 </form>
 
