@@ -24,8 +24,3 @@ class RestoUpdateForm(forms.ModelForm):
 		'address': GooglePointFieldWidget,
 		}
 
-class CreateDishForm(forms.ModelForm):
-
-	class Meta:
-		model = Dish
-		fields = ('name','description','cost','veg','resto')
