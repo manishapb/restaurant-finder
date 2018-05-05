@@ -1,10 +1,11 @@
 from django.shortcuts import render,get_object_or_404
 from django.views.generic import CreateView,ListView,DetailView,UpdateView
-from .forms import RestoCreateForm, RestoUpdateForm, CreateDishForm
+from .forms import RestoCreateForm, RestoUpdateForm
 from django.urls import reverse_lazy
 from .models import Resto,Dish
 from django.contrib.gis.measure import D
 from django.contrib.gis.geos import Point
+from django.db.models import Count
 
 
 class RestoCreateView(CreateView):
@@ -30,20 +31,6 @@ class DetailRestoView(DetailView):
 		return context
 
 
-class AddDishView(CreateView):
-	template_name="resto/add_item.html"
-	form_class = CreateDishForm
-	success_url = reverse_lazy("resto:list")
-
-	# def form_valid(self,form):
-	# 	print(self.request)
-	# 	item = form.save(commit=False)
-
-	# 	resto = Resto.objects.get(pk=self.request.POST.get('resto'))
-	# 	item.resto = resto
-	# 	return super(AddDishView,self).form_valid(form)
-
-
 def search(request):
 	if request.method=='GET':
 		lat = float(request.GET.get('user_lat'))
@@ -57,7 +44,7 @@ def search(request):
 			dishes = Dish.objects.filter(resto__in=restos,veg=True)
 		else:
 			dishes = Dish.objects.filter(resto__in=restos)
-
+		dishes=dishes.annotate(null_rating=Count('rating')).order_by('-null_rating','-rating')
 		return render(request,'resto/result.html',{'dishes':dishes})
 
 		
