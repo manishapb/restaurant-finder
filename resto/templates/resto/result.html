@@ -7,7 +7,10 @@
 	{% if dishes.all %}
 	<ul>
 		{% for dish in dishes %}
-		<li><a href="{% url "resto:dish_detail" dish.id %}" >{{ dish.name }}</a></li>
+		<li><a href="{% url "resto:dish_detail" dish.id %}" >{{ dish.name }}</a>
+			<p>{{ dish.description }}</p>
+			<p>{{ dish.resto.name }}
+			<p>{{ dish.cost }}</p></li>	
 		{% endfor %}
 	</ul>
 	{% else %}
