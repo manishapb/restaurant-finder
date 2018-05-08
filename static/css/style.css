@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css?family=Concert+One|Pacifico');
+
+.container {
+	margin-top: 20px;
+	margin-right: 30px;
+	margin-left: 30px;
+}
+label {
+	font-family: "Arial", Helvetica, sans-serif;
+	font-size: 15px;
+}
+header h1 {
+	font-family: "Concert One", cursive;
+}
