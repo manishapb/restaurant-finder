@@ -126,6 +126,8 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 MEDIA_URL = '/uploads/'
 
@@ -134,7 +136,7 @@ STATICFILES_DIRS = [
 ]
 
 
-GOOGLE_MAP_API_KEY = "google-app-secret-key"
+GOOGLE_MAP_API_KEY = "google-api-key"
 
 try:
     from settings_local import *
