@@ -7,19 +7,41 @@
     top: 2px;
     right: 2px;
 }
+
+.mdl-card {
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+a {
+	text-decoration-line: none;
+	color:#000;
+}
+.search-result {
+	padding: 20px;
+    background: #fafafa;
+    position: relative;
+}
+
 </style>
 {% endblock %}
 
 {% block content %}
-<h1>Search Result</h1>
-<a href="{% url "home" %}"> << Back </a>
+<div class="mini-header">
+	<span class="">Search result</span>
+</div>
 <div class="search-result">
 	{% if dishes.all %}
 		{% for dish in dishes %}
 		<br>
-		<div class="mdl-card mdl-shadow--4dp" style="position: relative;">	
+		<div class="mdl-card mdl-card-result mdl-shadow--4dp" style="position: relative;">	
 			<div class="mdl-card__title">
-				<a href="{% url "resto:dish_detail" dish.id %}" >{{ dish.name }}  </a>
+				<h3 class="mdl-card__title-text mdl-color-text--white">
+				<a href="{% url "resto:dish_detail" dish.id %}">{{ dish.name }}  </a></h3>
+			</div>
+			<hr style="border-color: #ff6f00;">
+			<div class="mdl-card__supporting-text">
 				<span class="topright">
 					{% if dish.rating %} 
 					<p>{{ dish.rating }}</p>
@@ -27,11 +49,9 @@
 					<i>Not yet rated</i>
 					{% endif %}
 				</span>
-			</div>
-			<div class="mdl-card__supporting-text">
 				<p>{{ dish.description }}</p>
 				<p>{{ dish.resto.name }}</p>
-				<p>{{ dish.cost }}</p>
+				<p>INR: {{ dish.cost }}</p>
 			</div>
 		</div>	
 		{% endfor %}

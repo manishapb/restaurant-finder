@@ -5,7 +5,6 @@
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src='http://maps.google.com/maps/api/js?sensor=false&libraries=places'></script>
 <script type="text/javascript" src='{% static "js/location_picker.js" %}'></script>
-
 <script type="text/javascript">
 function getLocation() {
 	let getLatLong = function (location) {
@@ -63,21 +62,24 @@ window.onload = function () {
 {% endblock %}
 
 {% block content %}
-<center>
-	<h1>I Want Nachos</h1>
-</center>
 <form action="{% url "resto:search" %}" method="GET">
 	<input id="user_lat" type="text" name="user_lat" placeholder="28.6562" style="display: none" />
 	<input id="user_long" type="text" name="user_long" placeholder="77.2410" style="display: none" />
 	
-	<label for="user_radius">Range</label>
-    <input id="user_radius" type="range" name="user_radius" min="5000" max="50000" value="5000" style="width:200px;" onchange="refreshMap()" />
-    <div style="float: right;">
-	    <input id="user_veg_only" type="checkbox" value="veg_only" name="user_veg_only" />
-    	<label for="user_veg_only">Veg Only?</label>
+	<div style="width:200px; padding: 10px;">
+		<label class="mdl-slider-div">
+			<span for="user_radius">Range</span>
+	    	<input class="mdl-slider mdl-js-slider" id="user_radius" type="range" name="user_radius" min="5000" max="50000" value="5000"  onchange="refreshMap()" />
+    	</label>
     </div>
-	<button type="submit" >Search</button>
+    <div style="float: right;">
+    	<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="user_veg_only">
+	    	<input id="user_veg_only" class="mdl-switch__input" type="checkbox" value="veg_only" name="user_veg_only" />
+	    	<span class="mdl-switch__label">Veg Only</span>
+    	</label>
+    </div>
+	<button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--deep-orange-400 mdl-color-text--white">Search</button>
 </form>
 <br>
-<div id="locationpicker" style="width: 100%; height: 400px;"></div>
+<div id="locationpicker" class="mdl-shadow--16dp map-container" style="width: 100%; height: 400px;  margin-top: 10px; margin-bottom: 10px;"></div>
 {% endblock %}
