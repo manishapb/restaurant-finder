@@ -36,6 +36,7 @@ class Dish(dmodels.Model):
 	veg = dmodels.BooleanField(default=True)
 	rating = dmodels.FloatField(null=True,blank=True,default=None,
 		validators=[MinValueValidator(0.0), MaxValueValidator(5.0)],)
+	image = dmodels.ImageField(upload_to="resto/", null=True,blank=True,default=None)
 
 	def __unicode__(self):
 		return self.name
