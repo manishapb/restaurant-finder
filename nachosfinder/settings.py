@@ -20,7 +20,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '2uu=#b*vvn-p6ku92tt_#ncr*w*e4d$egtf8#@3=8y6#)$9aqv'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -79,11 +78,7 @@ WSGI_APPLICATION = 'nachosfinder.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'nachosfinder',
-        'USER': 'postgres',
-        'PASSWORD': 'pink123',
-        'HOST': 'localhost',
-        'PORT':''
+        'NAME': ''
     }
 }
 
