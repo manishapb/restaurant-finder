@@ -1,10 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div>
-	<h1>{{ dish.name }}</h1>
-	<h2>{{ dish.description }}</h2>
-	<h3>{{ dish.cost }}</h3>
-	<h3><a href="{% url "resto:resto_detail" dish.resto.id  %}" >{{ dish.resto.name }}</h3>
+<div class="left" style="float: left; width:40%; height: 200px; margin-left: 20px;">
+	<img src="" />
+	<span class="dish-title">{{ dish.name }}</span>
 </div>
+<div class="right" style="float: left; width: 40%; height: 200px; margin-left: 5px;">
+	<p><span class="dish-detail">{{ dish.description }}</span></p>
+	<p><span>INR: {{ dish.cost }}</span></p>
+	<p><a href="{% url "resto:resto_detail" dish.resto.id  %}" >{{ dish.resto.name }}</a></p>
+</div>
+<div class="dish-rating" style="clear: both; width: 100%;">
+	<span> {{ dish.rating }}</span>
+</div>
+
 {% endblock %}
