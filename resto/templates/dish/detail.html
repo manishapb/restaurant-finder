@@ -1,16 +1,30 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="left" style="float: left; width:40%; height: 200px; margin-left: 20px;">
-	<img src="" />
-	<span class="dish-title">{{ dish.name }}</span>
+<span class="sub-title">
+	<p style="font-size: 25px; font-family: 'Bree Serif', serif;"><b>{{ dish.name }}</b></p>
+</span>
+<hr style="border-color: #ff6f00;">
+
+<div class="mdl-shadow--4dp" style="float: left; width:100%; margin-top: 10px; background-color: #c5cae9;">
+<div class="left" style="float: left; width:48%; height: 300px; margin-right: 0;">
+	{% if dish.image %}
+	<img src="{{ MEDIA_URL }}{{ dish.image.url }}" style="width: 100%; height: 100%;" />
+	{% else %}
+	<p> No image </p>
+	{% endif %}
 </div>
-<div class="right" style="float: left; width: 40%; height: 200px; margin-left: 5px;">
-	<p><span class="dish-detail">{{ dish.description }}</span></p>
+<div class="right" style="float: right; width: 50%; height: 300px; margin-left: 0px;  ">
+	<span class="mini-header">Description:</span>
+	<br>
+	<p><span class="dish-detail"><i>{{ dish.description }}</i></span></p>
 	<p><span>INR: {{ dish.cost }}</span></p>
-	<p><a href="{% url "resto:resto_detail" dish.resto.id  %}" >{{ dish.resto.name }}</a></p>
+	<p><a href="{% url "resto:resto_detail" dish.resto.id  %}" style="text-decoration-line: none; color: #000;">{{ dish.resto.name }}</a></p>
+</div>
 </div>
 <div class="dish-rating" style="clear: both; width: 100%;">
+	<br>
+	<p>Rating</p>
 	<span> {{ dish.rating }}</span>
 </div>
 

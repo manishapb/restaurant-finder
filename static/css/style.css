@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Concert+One|Pacifico');
+@import url('https://fonts.googleapis.com/css?family=Concert+One|Pacifico|Bree+Serif');
 
 .container {
 	margin-top: 20px;
@@ -11,4 +11,7 @@ label {
 }
 header h1 {
 	font-family: "Concert One", cursive;
+}
+.sub-title {
+	font-size: 60px;
 }
