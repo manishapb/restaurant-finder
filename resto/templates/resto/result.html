@@ -45,7 +45,7 @@ a {
 					{% endif %}
 				</span>
 				<p>{{ dish.description }}</p>
-				<p>{{ dish.resto.name }}</p>
+				<p><a href="{% url "resto:resto_detail" dish.resto.id %}" > {{ dish.resto.name }}</a></p>
 				<p>INR: {{ dish.cost }}</p>
 			</div>
 		</div>	
