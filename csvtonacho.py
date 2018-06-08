@@ -1,7 +1,8 @@
 import csv
 import psycopg2
+import sys
 
-fname = 'nachos-list.csv'
+fname = sys.argv[1]
 
 conn = psycopg2.connect(dbname="nachosfinder",user="postgres",password="pink123",host="localhost",port="")
 cur = conn.cursor()

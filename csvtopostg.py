@@ -1,12 +1,14 @@
 import psycopg2
 import csv
 import json
+import sys
 
 
 conn = psycopg2.connect(dbname="nachosfinder",user="postgres",password="pink123",host="localhost",port="")
 cur = conn.cursor()
 
-fname = 'restos.csv'
+fname = sys.argv[1]
+
 
 #reader = csv.DictReader(f)
 fieldnames = ("lat","lng","name")
