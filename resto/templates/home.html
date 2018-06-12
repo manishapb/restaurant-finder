@@ -48,15 +48,29 @@ function refreshMap() {
 }
 
 window.onload = function () {
-	showMap(28.6562,77.2410,5000);
+	console.log('window loaded')
 
 	getLocation().then(function (res){
 		user_lat.value = res[0];
 		user_long.value = res[1];
-		showMap(res[0], res[1], 5000);
+		showMap(res[0], res[1], 2000);
 	}, function (_) {
 		alert('Geolocation not supported in your browser!');
 	});
+
+	var input = document.getElementById('pac-input');
+
+	var autocomplete = new google.maps.places.Autocomplete(input);
+		autocomplete.addListener('place_changed', function() {
+          var place = autocomplete.getPlace();
+          if (!place.geometry) {
+            window.alert("No details available for input: '" + place.name + "'");
+            return;
+          }
+          let radius = user_radius.value;
+     	showMap(place.geometry.location.lat(),place.geometry.location.lng(), radius);
+ 	});
+
 }
 </script>
 {% endblock %}
@@ -69,7 +83,7 @@ window.onload = function () {
 	<div style="width:200px; padding: 10px;">
 		<label class="mdl-slider-div">
 			<span for="user_radius">Range</span>
-	    	<input class="mdl-slider mdl-js-slider" id="user_radius" type="range" name="user_radius" min="5000" max="50000" value="5000"  onchange="refreshMap()" />
+	    	<input class="mdl-slider mdl-js-slider" id="user_radius" type="range" name="user_radius" min="2000" max="20000" value="5000"  onchange="refreshMap()" />
     	</label>
     </div>
     <div style="float: right;">
@@ -80,6 +94,10 @@ window.onload = function () {
     </div>
 	<button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--deep-orange-400 mdl-color-text--white">Search</button>
 </form>
+<br>
+<div class="mdl-textfield mdl-js-textfield">
+  	<input id="pac-input" class="mdl-textfield__input" type="text" size="50">
+</div>
 <br>
 <div id="locationpicker" class="mdl-shadow--16dp map-container" style="width: 100%; height: 400px;  margin-top: 10px; margin-bottom: 10px;"></div>
 {% endblock %}
