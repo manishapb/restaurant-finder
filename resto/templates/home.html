@@ -52,6 +52,7 @@ window.onload = function () {
 	console.log('window loaded')
 
 	getLocation().then(function (res){
+		print(res);
 		user_lat.value = res[0];
 		user_long.value = res[1];
 		showMap(res[0], res[1], 5000);
