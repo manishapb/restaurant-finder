@@ -7,6 +7,7 @@
 <script type="text/javascript" src='{% static "js/location_picker.js" %}'></script>
 <script type="text/javascript">
 function getLocation() {
+	showMap(28.6562,77.2410,5000);
 	let getLatLong = function (location) {
 		return [location.coords.latitude, location.coords.longitude];
     }
@@ -53,7 +54,7 @@ window.onload = function () {
 	getLocation().then(function (res){
 		user_lat.value = res[0];
 		user_long.value = res[1];
-		showMap(res[0], res[1], 2000);
+		showMap(res[0], res[1], 5000);
 	}, function (_) {
 		alert('Geolocation not supported in your browser!');
 	});
@@ -83,7 +84,7 @@ window.onload = function () {
 	<div style="width:200px; padding: 10px;">
 		<label class="mdl-slider-div">
 			<span for="user_radius">Range</span>
-	    	<input class="mdl-slider mdl-js-slider" id="user_radius" type="range" name="user_radius" min="2000" max="20000" value="5000"  onchange="refreshMap()" />
+	    	<input class="mdl-slider mdl-js-slider" id="user_radius" type="range" name="user_radius" min="5000" max="50000" value="5000"  onchange="refreshMap()" />
     	</label>
     </div>
     <div style="float: right;">
